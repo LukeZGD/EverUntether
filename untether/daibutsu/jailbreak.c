@@ -339,7 +339,7 @@ void unjail8(void){
     *(uint32_t*)(taig32_payload+0x88) = sb_evaluate_val;
     *(uint32_t*)(taig32_payload+0x8c) = back_sb_evaluate;
 
-    void* sandbox_payload = malloc(payload_len);
+    void* sandbox_payload = calloc(1, payload_len);
     memcpy(sandbox_payload, taig32_payload, payload_len);
 
     // hook sb_evaluate
@@ -478,8 +478,6 @@ void unjail9(void){
         uint32_t sb_patch = kbase + find_sb_patch(kbase, kdata, ksize);
         uint32_t memcmp_addr = find_memcmp(kbase, kdata, ksize);
         uint32_t vn_getpath = find_vn_getpath(kbase, kdata, ksize);
-        uint32_t csops_addr = kbase + find_csops(kbase, kdata, ksize);
-        uint32_t csops2_addr = kbase + find_csops2(kbase, kdata, ksize);
 
         /* sb_evaluate */
         unsigned char pangu9_payload[] = {
@@ -527,7 +525,7 @@ void unjail9(void){
         *(uint32_t*)(pangu9_payload+0x82) = sb_evaluate_val;
         *(uint32_t*)(pangu9_payload+0x86) = back_sb_evaluate;
 
-        void* sandbox_payload = malloc(payload_len);
+        void* sandbox_payload = calloc(1, payload_len);
         memcpy(sandbox_payload, pangu9_payload, payload_len);
 
         // hook sb_evaluate
