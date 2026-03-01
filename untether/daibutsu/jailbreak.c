@@ -139,7 +139,6 @@ void unjail8(void){
 
     print_log("[*] running kdumper\n");
 
-    uint32_t kbase = kinfo->kernel_base;
     size_t ksize = 0xFFE000;
     void *kdata = calloc(1, ksize);
     physread_buf(0x80001000, kdata, ksize);
@@ -272,7 +271,6 @@ void unjail9(void){
     print_log("[*] jailbreaking...\n");
 
     print_log("[*] running kdumper\n");
-    uint32_t kbase = kinfo->kernel_base;
     size_t ksize = 0xFFE000;
     void *kdata = calloc(1, ksize);
     physread_buf(0x80001000, kdata, ksize);
@@ -492,6 +490,7 @@ void load_jb(void){
 
 void failed(void){
     print_log("[-] failed to execute untether. rebooting.\n");
+    //sleep(5);
     reboot(0);
 }
 
